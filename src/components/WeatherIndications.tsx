@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import WeatherIcon from './WeatherIcon';
 
 
 
-interface IWeatherDay {
-  morning: string;
-  afternoon: string;
-}
 
-
-function App() {  
-  
-  const [weatherDay, setWeatherDay] = useState<IWeatherDay>()
+function WeatherIndication({weatherCode, temp, morning} : { weatherCode : number | undefined, temp : string | undefined, morning : boolean }) {  
 
 
   return (
     <div className="WeatherIndications">
+        <div className="titre">{ morning ? 'Matin' : 'Aprem'}</div>
+        <WeatherIcon code={weatherCode ?? 0} />
+        <div className="contain-temps">
+            {temp}
+        </div>
     </div>
   );
 }
 
-export default App;
+export default WeatherIndication;

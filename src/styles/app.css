@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(24, 24, 34);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.WeatherIndications {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+    border: 2px solid white;
+    border-radius: 14px;
+    padding: 3em;
+}
+
+.titre {
+    margin-bottom: 1em;
+
+}
