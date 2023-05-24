@@ -14,11 +14,6 @@ function App() {
   
   const [weatherDay, setWeatherDay] = useState<IWeatherDay>()
   const [tomorrow, setTomorrow] = useState<boolean>(true)
-  //matim
-  //aprem
-
-  //today
-  //demaim
 
   let baseUrl =  'https://api.open-meteo.com/v1/meteofrance?&hourly=temperature_2m,weathercode'
   const latitude = 43.60
