@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 .App {
     width: 100vw;
     height: 100vh;
@@ -26,5 +30,24 @@
 
 .titre {
     margin-bottom: 1em;
+}
 
+.contains-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contains-buttons button {
+    border: 2px solid white;
+    padding: 5px 15px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.contains-buttons button[data-selected='true'] {
+    background-color: white;
+    color: rgb(24, 24, 34);
+    cursor: default;
 }

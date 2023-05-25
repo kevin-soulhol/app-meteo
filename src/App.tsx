@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './styles/app.css';
 import WeatherIndication from './components/WeatherIndications';
 
@@ -28,7 +27,7 @@ function App() {
 
   let baseUrl =  'https://api.open-meteo.com/v1/meteofrance?&hourly=temperature_2m,weathercode'
   const latitude = 43.60
-  const longitude = 1.44
+  const longitude = 1.43333
 
   const fetchWeather = () => {
 
@@ -68,9 +67,9 @@ function App() {
     let morning = 0
     let afternoon = 0
 
-    if(data.hourly.weatherCode){
-      morning = getMoyenneWeatherCode(data.hourly.weatherCode.slice(morningRange.start, morningRange.end))
-      afternoon = getMoyenneWeatherCode(data.hourly.weatherCode.slice(afternoonRange.start, afternoonRange.end))
+    if(data.hourly.weathercode){
+      morning = getMoyenneWeatherCode(data.hourly.weathercode.slice(morningRange.start, morningRange.end))
+      afternoon = getMoyenneWeatherCode(data.hourly.weathercode.slice(afternoonRange.start, afternoonRange.end))
     }
 
     return {
@@ -84,15 +83,12 @@ function App() {
   }
 
   const getMoyenneWeatherCode = (arr : number[]) => {
+    arr = arr.filter(code => code != 0)
     return arr.sort((a,b) =>
           arr.filter(v => v===a).length
         - arr.filter(v => v===b).length
     ).pop() ?? 0;
 }
-
-  const toggleTomorrow = () => {
-    setTomorrow(!tomorrow)
-  }
 
   const _parseUrl = () => {
     let day = new Date()
@@ -101,7 +97,7 @@ function App() {
     }
 
 
-    let date = day.getDay()
+    let date = day.getDate()
     let stringDay = date<10 ? `0${date}` : `${date}`
     let month = day. getMonth()
     let stringMonth = month<10 ? `0${month}` : `${month}`
@@ -111,6 +107,7 @@ function App() {
      url = `${url}&start_date=${year}-${stringMonth}-${stringDay}`
      url = `${url}&end_date=${year}-${stringMonth}-${stringDay}`
 
+     console.log(url)
      return url;
   }
 
@@ -124,9 +121,12 @@ function App() {
 
       <WeatherIndication morning={true} temp={weatherDay?.morning} weatherCode={weatherCodeDay?.morning} />
       <WeatherIndication morning={false} temp={weatherDay?.afternoon} weatherCode={weatherCodeDay?.afternoon} />
-      
 
-      <button onClick={toggleTomorrow}>{tomorrow ? 'Today' : 'Demain'}</button>
+      <div className="contains-buttons">
+        <button data-selected={!tomorrow} onClick={() => setTomorrow(false)}>Aujourd'hui</button>
+        <button data-selected={tomorrow} onClick={() => setTomorrow(true)}>Demain</button>
+      </div>
+    
     
     </div>
   );
