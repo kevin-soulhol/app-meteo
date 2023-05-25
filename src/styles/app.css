@@ -32,6 +32,10 @@
     margin-bottom: 1em;
 }
 
+.containIcon i {
+    font-size: 5em;
+}
+
 .contains-buttons {
     display: flex;
     justify-content: space-between;

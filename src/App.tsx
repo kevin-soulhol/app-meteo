@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/app.css';
+import './styles/weather-icons.css';
 import WeatherIndication from './components/WeatherIndications';
 
 
@@ -36,7 +37,7 @@ function App() {
       let weatherCodeDay = parseWeather(data)
       setWeatherDay(tempDay);
       setWeatherCodeDay(weatherCodeDay)
-      console.log(data, weatherCodeDay)
+      console.log(data)
     })
   }
 
@@ -56,8 +57,8 @@ function App() {
     }
 
     return {
-      morning : new Intl.NumberFormat('fr-FR', { maximumSignificantDigits : 2, style : 'unit', unit : 'celsius' }).format(morningMoyenne),
-      afternoon : new Intl.NumberFormat('fr-FR', { maximumSignificantDigits : 2, style : 'unit', unit : 'celsius' }).format(afternoonMoyenne) 
+      morning : new Intl.NumberFormat('fr-FR', { maximumSignificantDigits : 3, style : 'unit', unit : 'celsius' }).format(morningMoyenne),
+      afternoon : new Intl.NumberFormat('fr-FR', { maximumSignificantDigits : 3, style : 'unit', unit : 'celsius' }).format(afternoonMoyenne) 
     }
 
   }
@@ -106,8 +107,6 @@ function App() {
     let url = `${baseUrl}&latitude=${latitude}&longitude=${longitude}`
      url = `${url}&start_date=${year}-${stringMonth}-${stringDay}`
      url = `${url}&end_date=${year}-${stringMonth}-${stringDay}`
-
-     console.log(url)
      return url;
   }
 

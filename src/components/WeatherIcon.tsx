@@ -1,67 +1,118 @@
-import { faCloud, faSun, faBolt, faWind, faSmog, faCloudBolt, faCloudSunRain, faCloudRain, faCloudSun, faCloudShowersWater, faSnowflake, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useEffect, useState } from 'react';
 
-
+interface IinCorrespondance {
+    [key: string]: string;
+}
 interface ICorrespondance {
-    [key: number]: IconProp;
+    [key: number]: IinCorrespondance;
 }
 
 function WeatherIcon({code} : { code : number }) {  
 
-    let correspondance : ICorrespondance = {
-        0 : faMoon,
-        1 : faSun,
-        2 : faCloudSun,
-        3 : faCloudSun,
-        4 : faCloud, 
-        5: faCloudRain,
-        6 : faSnowflake,
-        8 : faCloudSunRain,
-        9 : faSnowflake,
-        10 : faSnowflake,
-        11 : faSmog,
-        12 : faSmog,
-        13 : faCloudShowersWater,
-        14 : faCloudBolt,
-        15 : faCloudRain,
-        16 : faMoon
+    const [icon, setIcon] = useState<string | undefined>()
+
+    const correspondance : ICorrespondance = {
+        0 :  //Haze, dust, sand or smoke
+        {
+            low : 'day-sunny',
+            medium : 'day-cloudy',
+            hard : 'day-cloudy',
+        },
+        1 : 
+        {
+            low : 'day-light-wind',
+            medium : 'day-haze',
+            hard : 'fog'
+        },
+        2 :  //Precipitation, fog, ice fog or thunderstorm at the station during the preceding hour but not at the time of observation 
+        {
+            low : 'day-rain',
+            medium : 'day-hail',
+            hard : 'rain',
+            thunder : 'thunderstorm'
+        },
+        3 : //Duststorm, sandstorm, drifting or blowing snow 
+        {
+            low : 'day-light-wind',
+            medium : 'day-light-wind',
+            hard : 'day-light-wind'
+        },
+        4 : //Fog or ice fog at the time of observation 
+        {
+            low : 'fog',
+            medium : 'fog',
+            hard : 'fog',
+        },
+        5 : //Drizzle
+        {
+            low : 'sleet',
+            medium : 'sleet',
+            hard : 'sleet',
+        },
+        6 : //Rain
+        {
+            low : 'rain',
+            medium : 'rain',
+            hard : 'rain',
+        },
+        7 : //Solid precipitation not in showers 
+        {
+            low : 'rain-mix',
+            medium : 'rain-mix',
+            hard : 'rain-mix',
+        },
+        8 :  //Showery precipitation, or precipitation with current or recent thunder storm 
+        {
+            low : 'showers',
+            medium : 'snow',
+            hard : 'storm-showers',
+        },
+        9 :  //Showery precipitation, or precipitation with current or recent thunder storm 
+        {
+            low : 'storm-showers',
+            medium : 'storm-showers',
+            hard : 'thunderstorm',
+        },
     }
 
-    /*
-    const icon : IconProp = () => {
-        if(code < 15){
-            return correspondance[code]
-        } else if (code < 30){
-            //precipitation, fog, ice
-            return faSnowflake
-        } else if (code < 40){
-            //sandstorm
-            return faMoon 
-        } else if (code < 50){
-            //Fog or ice fog
-            return faSmog 
-        } else if (code < 60){
-            //Drizzle 
-            return faSmog 
-        } else if (code < 70){
-            //Rain 
-            return faCloudRain 
-        } else if (code < 80){
-            //Snow 
-            return faSnowflake 
-        } else {
-            return faMoon 
+    useEffect(() => {
+        _parseIcon()
+    }, [code])
+
+    const _parseIcon : any = () => {
+        let cpCode = `${code}`
+        if(code < 10){
+            cpCode = `0${code}`
         }
+        let arrCode = `${cpCode}`.split('')
+
+        let firstCode = parseInt(arrCode[0])
+        let secondCode = parseInt(arrCode[1])
+        let force = null
+        if(secondCode < 3){
+            force = 'low'
+        } else if(secondCode < 7){
+            force = 'medium'
+        } else {
+            force = 'hard'
+        }
+
+        setIcon(`wi wi-${correspondance[firstCode][force]}`)
     }
-    */
 
 
   return (
     <div className="containIcon">
-        <FontAwesomeIcon icon={correspondance[code]} size='4x' />
+        <i className={icon}></i>
     </div>
   );
 }
 
 export default WeatherIcon;
+
+
+/*
+*
+
+        <FontAwesomeIcon icon={correspondance[code]} size='4x' />
+        */
