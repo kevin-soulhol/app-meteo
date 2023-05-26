@@ -17,8 +17,8 @@ interface IWeatherCodeDay {
   afternoon: number;
 }
 
-const morningRange = { start : 9, end : 13 }
-const afternoonRange = { start : 14, end : 18 }
+const morningRange = { start : 8, end : 13 }
+const afternoonRange = { start : 14, end : 20 }
 
 
 function App() {  
@@ -129,7 +129,7 @@ function App() {
         <button data-selected={tomorrow} onClick={() => setTomorrow(true)}>Demain</button>
       </div>
 
-      <ChartTemp label={data?.hourly?.time} temperature={data?.hourly?.temperature_2m} />
+      <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={data?.hourly?.temperature_2m} />
     
     
     </div>
