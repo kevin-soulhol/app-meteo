@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './styles/app.css';
 import './styles/weather-icons.css';
 import WeatherIndication from './components/WeatherIndications';
+import ChartTemp from './components/ChartTemp';
 
 
 
@@ -24,6 +25,7 @@ function App() {
   
   const [weatherDay, setWeatherDay] = useState<IWeatherDay>()
   const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>()
+  const [data, setData] = useState<any>()
   const [tomorrow, setTomorrow] = useState<boolean>(true)
 
   let baseUrl =  'https://api.open-meteo.com/v1/meteofrance?&hourly=temperature_2m,weathercode'
@@ -37,6 +39,7 @@ function App() {
       let weatherCodeDay = parseWeather(data)
       setWeatherDay(tempDay);
       setWeatherCodeDay(weatherCodeDay)
+      setData(data)
       console.log(data)
     })
   }
@@ -125,6 +128,8 @@ function App() {
         <button data-selected={!tomorrow} onClick={() => setTomorrow(false)}>Aujourd'hui</button>
         <button data-selected={tomorrow} onClick={() => setTomorrow(true)}>Demain</button>
       </div>
+
+      <ChartTemp label={data?.hourly?.time} temperature={data?.hourly?.temperature_2m} />
     
     
     </div>
