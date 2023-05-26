@@ -24,7 +24,8 @@ ChartJS.register(
 function ChartTemp({ label, temperature } : { label : string[], temperature : number[] }) {  
 
     const options =  {
-        responsive: false,
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display : false,
@@ -54,7 +55,7 @@ function ChartTemp({ label, temperature } : { label : string[], temperature : nu
     }
 
   return (
-    <div className="ChartTemp">
+    <div className="ChartTemp" style={{width: "80vw"}}>
         <Line options={options} data={data} />
     </div>
   );
