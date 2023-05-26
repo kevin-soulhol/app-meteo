@@ -18,7 +18,7 @@ interface IWeatherCodeDay {
 }
 
 const morningRange = { start : 8, end : 13 }
-const afternoonRange = { start : 14, end : 20 }
+const afternoonRange = { start : 14, end : 22 }
 
 
 function App() {  
@@ -121,8 +121,7 @@ function App() {
   return (
     <div className="App">
 
-      <WeatherIndication morning={true} temp={weatherDay?.morning} weatherCode={weatherCodeDay?.morning} />
-      <WeatherIndication morning={false} temp={weatherDay?.afternoon} weatherCode={weatherCodeDay?.afternoon} />
+
 
       <div className="contains-buttons">
         <button data-selected={!tomorrow} onClick={() => setTomorrow(false)}>Aujourd'hui</button>
@@ -131,6 +130,10 @@ function App() {
 
       <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={data?.hourly?.temperature_2m} />
     
+    <div className="contain-Indications">
+      <WeatherIndication morning={true} temp={weatherDay?.morning} weatherCode={weatherCodeDay?.morning} />
+      <WeatherIndication morning={false} temp={weatherDay?.afternoon} weatherCode={weatherCodeDay?.afternoon} />
+    </div>
     
     </div>
   );
