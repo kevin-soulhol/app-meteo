@@ -1,0 +1,31 @@
+.toogleButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 99;
+    cursor: pointer;
+
+    .onglet {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .selectedLine {
+        height: 4px;
+        width: 50%;
+        background-color: white;
+        border-radius: 8px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: all 0.2s ease-in-out;
+
+        &.right {
+            transform:  translateX(100%);
+        }
+    }
+}

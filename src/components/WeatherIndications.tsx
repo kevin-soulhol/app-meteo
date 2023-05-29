@@ -9,10 +9,10 @@ function WeatherIndication({weatherCode, temp, morning} : { weatherCode : number
   return (
     <div className="WeatherIndications">
         <div className="titre">{ morning ? 'Matin' : 'Aprem'}</div>
-        <WeatherIcon code={weatherCode ?? 0} />
         <div className="contain-temps">
-            {temp}
+            {temp}°
         </div>
+        <WeatherIcon code={weatherCode ?? 0} />
     </div>
   );
 }

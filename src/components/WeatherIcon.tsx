@@ -89,7 +89,7 @@ function WeatherIcon({code} : { code : number }) {
         let firstCode = parseInt(arrCode[0])
         let secondCode = parseInt(arrCode[1])
         let force = null
-        if(secondCode < 3){
+        if(secondCode <= 3){
             force = 'low'
         } else if(secondCode < 7){
             force = 'medium'
@@ -109,10 +109,3 @@ function WeatherIcon({code} : { code : number }) {
 }
 
 export default WeatherIcon;
-
-
-/*
-*
-
-        <FontAwesomeIcon icon={correspondance[code]} size='4x' />
-        */
