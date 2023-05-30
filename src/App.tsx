@@ -97,7 +97,6 @@ function App() {
     if(tomorrow){
       day.setDate(day.getDate() + 1)
     }
-    console.log(day, day.getTime(), 'laaaaaa')
     setDate(day)
 
 
@@ -139,7 +138,7 @@ function App() {
       </div>
 
       <div className="moonBloc">
-          <MoonIndications date={date} />
+          <MoonIndications date={date} latitude={latitude} longitude={longitude} />
       </div>
 
       <div className="footer">
