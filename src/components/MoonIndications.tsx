@@ -15,7 +15,7 @@ function MoonIndications({ date, latitude, longitude }: { date: Date | undefined
             let urlApi = `${url}?d=${timestamp}&lat=${latitude}&lon=${longitude}`
             fetch(urlApi).then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    console.log('MoonApi', data)
                     if(data[0].error){
                         setError(data[0].ErrorMsg)
                     } else {

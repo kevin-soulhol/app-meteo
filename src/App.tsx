@@ -40,6 +40,7 @@ function App() {
   const fetchWeather = () => {
 
     fetch(_parseUrl()).then(response => response.json()).then(data => {
+      console.log('meteoApi', data)
       let tempDay = parseTemp(data)
       let weatherCodeDay = parseWeather(data)
       setTempDay(tempDay);

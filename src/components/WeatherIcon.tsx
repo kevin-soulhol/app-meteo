@@ -89,7 +89,7 @@ function WeatherIcon({code} : { code : number }) {
         let firstCode = parseInt(arrCode[0])
         let secondCode = parseInt(arrCode[1])
         let force = null
-        if(secondCode <= 3){
+        if(secondCode <= 2){
             force = 'low'
         } else if(secondCode < 7){
             force = 'medium'
