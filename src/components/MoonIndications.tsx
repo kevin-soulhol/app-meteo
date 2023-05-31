@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-var url2 = "http://api.farmsense.net/v1/moonphases/";
+var url = "http://api.farmsense.net/v1/moonphases/";
 function MoonIndications({ date, latitude, longitude }: { date: Date | undefined, latitude: number, longitude: number }) {
 
     const [moonPhase, setMoonPhase] = useState<string>('')
@@ -12,9 +12,10 @@ function MoonIndications({ date, latitude, longitude }: { date: Date | undefined
             let timestamp = getTimestamp(date)
 
 
-            let urlApi = `${url2}?d=${timestamp}&lat=${latitude}&lon=${longitude}`
+            let urlApi = `${url}?d=${timestamp}&lat=${latitude}&lon=${longitude}`
             fetch(urlApi).then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     if(data[0].error){
                         setError(data[0].ErrorMsg)
                     } else {

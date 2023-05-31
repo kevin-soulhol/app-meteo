@@ -31,7 +31,7 @@ function App() {
   const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>()
   const [data, setData] = useState<any>()
   const [date, setDate] = useState<Date>()
-  const [tomorrow, setTomorrow] = useState<boolean>(true)
+  const [tomorrow, setTomorrow] = useState<boolean>(false)
 
   let baseUrl =  'https://api.open-meteo.com/v1/meteofrance?&hourly=temperature_2m,weathercode,apparent_temperature'
   const latitude = 43.60
@@ -123,7 +123,7 @@ function App() {
     <div className="App">
 
       <header>
-        {date?.getDate()}
+        {new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(date)}
         <ToggleButton selected={tomorrow ? 2 : 1} onClick={() => setTomorrow(!tomorrow)} />
       </header>
 
