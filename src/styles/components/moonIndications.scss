@@ -1,17 +1,15 @@
 .moonIndications {
-    position: absolute;
+    position: relative;
     z-index: 90;
     font-size: 2em;
-    top: 0;
-    left: -5%;
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 0 8px 8px 0;
+    border-radius: 8px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;;
-    padding: 5px;
-    padding-right: 15px;
-    padding-left: 35px;
+    padding: 5px 20px;
+    margin: 0 -5px;
     box-shadow: 0 0 5px rgba(255,255, 255, 0.5);
     color: rgb(2, 5, 22);
+    width: min-content;
 }

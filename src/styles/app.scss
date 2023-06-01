@@ -5,6 +5,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
 #root{
     background: linear-gradient(207deg, rgba(19,103,138,1) 0%, rgba(69,196,176,1) 100%);
     width: 100vw;
@@ -67,8 +71,12 @@ header {
 }
 
 .moonBloc {
-    position: relative;
+    position: fixed;
     width: 100%;
+    right: 0;
+    top: 15vh;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .footer {

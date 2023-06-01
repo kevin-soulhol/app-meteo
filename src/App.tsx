@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import './styles/app.scss';
 import WeatherIndication from './components/WeatherIndications';
 import ChartTemp from './components/ChartTemp';
 import WeatherIcon from './components/WeatherIcon';
 import ToggleButton from './components/ToogleButton';
 import MoonIndications from './components/MoonIndications';
 import DayVisibility from './components/DayVisibility';
+import useGetWeather from './utils/useGetWeather';
 
 
 
@@ -30,24 +30,9 @@ function App() {
   
   const [tempDay, setTempDay] = useState<IWeatherDay>()
   const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>()
-  const [data, setData] = useState<any>()
-  const [date, setDate] = useState<Date>()
   const [tomorrow, setTomorrow] = useState<boolean>(false)
+  const [currentDate, loading, data, latitude, longitude] = useGetWeather(tomorrow);
 
-  let baseUrl =  'https://api.open-meteo.com/v1/meteofrance?&hourly=temperature_2m,weathercode,apparent_temperature'
-  const latitude = 43.60
-  const longitude = 1.43333
-
-  const fetchWeather = () => {
-
-    fetch(_parseUrl()).then(response => response.json()).then(data => {
-      let tempDay = parseTemp(data)
-      let weatherCodeDay = parseWeather(data)
-      setTempDay(tempDay);
-      setWeatherCodeDay(weatherCodeDay)
-      setData(data)
-    })
-  }
 
   const parseTemp = (data : any) => {
     let wichTemp = 'apparent_temperature'
@@ -91,62 +76,39 @@ function App() {
     return arr.reduce((acc : number , curr : number) => acc + curr, 0)/arr.length;
   }
 
-
-
-  const _parseUrl = () => {
-    let day = new Date()
-    if(tomorrow){
-      day.setDate(day.getDate() + 1)
-    }
-    setDate(day)
-
-
-    let date = day.getDate()
-    let stringDay = date<10 ? `0${date}` : `${date}`
-    let month = day. getMonth()+1
-    let stringMonth = month<10 ? `0${month}` : `${month}`
-    let year = day.getFullYear()
-
-    let url = `${baseUrl}&latitude=${latitude}&longitude=${longitude}`
-     url = `${url}&start_date=${year}-${stringMonth}-${stringDay}`
-     url = `${url}&end_date=${year}-${stringMonth}-${stringDay}`
-     url = `${url}&timezone=GMT`
-     url = `${url}&daily=temperature_2m_max,apparent_temperature_max`
-     return url;
-  }
-
-
   useEffect(() => {
-    fetchWeather()
-  }, [tomorrow])
+    if(data){
+      let tempDay = parseTemp(data)
+      let weatherCodeDay = parseWeather(data)
+      setTempDay(tempDay);
+      setWeatherCodeDay(weatherCodeDay)
+    }
+  }, [data])
 
   return (
     <div className="App">
-
       <header>
-        {new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(date)}
+        {new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(currentDate)}
         <ToggleButton selected={tomorrow ? 2 : 1} onClick={() => setTomorrow(!tomorrow)} />
       </header>
 
       <div className="centerElements">
         <div className="mainIcon"><WeatherIcon code={weatherCodeDay?.day ?? 0} /></div>
         <div className="currentTemp">{tempDay?.day}°</div>
-       
-
+      
         <WeatherIndication morning={true} temp={tempDay?.morning} weatherCode={weatherCodeDay?.morning} />
         <WeatherIndication morning={false} temp={tempDay?.afternoon} weatherCode={weatherCodeDay?.afternoon} />
-        
       </div>
 
       <div className="moonBloc">
-          <MoonIndications date={date} latitude={latitude} longitude={longitude} />
+          <MoonIndications date={currentDate} latitude={latitude} longitude={longitude} />
       </div>
 
       <div className="footer">
         <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={data?.hourly?.apparent_temperature} />
         <DayVisibility codesInDay={data?.hourly?.weathercode?.slice(morningRange.start, afternoonRange.end)} firstHour={morningRange.start} lastHour={afternoonRange.end} />
       </div>
-    
+
     </div>
   );
 }
