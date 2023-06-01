@@ -80,7 +80,6 @@ function WeatherIcon({code} : { code : number }) {
     }, [code])
 
     const _parseIcon : any = () => {
-        console.log(code)
         let cpCode = `${code}`
         if(code < 10){
             cpCode = `0${code}`

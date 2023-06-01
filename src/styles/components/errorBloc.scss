@@ -1,0 +1,23 @@
+.error {
+    $redColor : rgb(141, 27, 27);
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    padding-left: 25px;
+    color: $redColor;
+    font-size: 0.8em;
+    text-align: center;
+    margin: auto;
+    width: max-content;
+    overflow: hidden;
+    position: relative;
+
+    .deco {
+        width: 10px;
+        height: 100px;
+        background-color: $redColor;
+        position: absolute;
+        left: 0;
+        top: -5px;
+    }
+}

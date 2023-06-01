@@ -4,6 +4,7 @@ const useGetWeather = (  tomorrow :  boolean ) => {
     const [currentDate, setCurrentDate] = useState<Date>()
     const [data, setData] = useState<any>()
     const [loading, setLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string>()
 
     const baseUrl = 'https://api.open-meteo.com/v1/'
     const weatherModel = 'meteofrance'
@@ -32,11 +33,19 @@ const useGetWeather = (  tomorrow :  boolean ) => {
         url += `&start_date=${getStringDate(date)}`
         url += `&end_date=${getStringDate(date)}`
     
+        
         fetch(url).then(response => response.json()).then(data => {
             console.log(data)
             setData(data)
+            setError(undefined)
             setLoading(false)
-        })
+        },
+        (error) => {
+            console.log(error.message)
+            setError(`Une erreur est survenue en questionnant l'API`)
+        }
+        )
+
     }
 
     const getStringDate = (date : Date) => {
@@ -64,7 +73,7 @@ const useGetWeather = (  tomorrow :  boolean ) => {
     }, [currentDate])
 
 
-    return [currentDate, loading, data, latitude, longitude]
+    return [currentDate, loading, data, latitude, longitude, error]
 }
 
 export default useGetWeather;

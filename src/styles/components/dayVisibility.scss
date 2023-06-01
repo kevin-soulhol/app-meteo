@@ -1,12 +1,10 @@
 .dayVisibility {
     position: relative;
     box-sizing: border-box;
-    width: 100%;
+    width: 99.5%;
     display: flex;
-    gap: 1em;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 1em;
 
     .indicateur {
         display: flex;
@@ -15,12 +13,25 @@
         align-items: center;
         position: relative;
 
+        .weatherIcon {
+            width: 13px;
+        }
+
         .ligne {
-            height: 100px;
+            height: 165px;
             position: absolute;
-            top : -115px;
+            top : -185px;
             border: 1.5px dotted rgba(255, 255, 255, 0.5);
             margin: 0;
+            display: flex;
+            justify-content: center;
+
+            .indicTemp {
+                position: absolute;
+                top: -30px;
+                font-size: 0.7em;
+                margin: auto;
+            }
         }
 
         p {
@@ -28,5 +39,8 @@
         }
     }
 
+    @media screen and ( max-width: 460px) {
+        font-size: 13px ;
+    }
 
 }

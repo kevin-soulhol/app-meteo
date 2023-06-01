@@ -6,20 +6,20 @@ import ToggleButton from './components/ToogleButton';
 import MoonIndications from './components/MoonIndications';
 import DayVisibility from './components/DayVisibility';
 import useGetWeather from './utils/useGetWeather';
-
+import ErrorBloc from './components/ErrorBloc';
 
 
 
 interface IWeatherDay {
   morning: string;
   afternoon: string;
-  day:string;
+  day: string;
 }
 
 interface IWeatherCodeDay {
   morning: number;
   afternoon: number;
-  day:number;
+  day: number;
 }
 
 const morningRange = { start : 8, end : 12 }
@@ -28,10 +28,21 @@ const afternoonRange = { start : 13, end : 20 }
 
 function App() {  
   
-  const [tempDay, setTempDay] = useState<IWeatherDay>()
-  const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>()
+  const [tempDay, setTempDay] = useState<IWeatherDay>({
+    morning: '0',
+    afternoon: '0',
+    day: '0'
+  })
+  const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>({
+    morning: 0,
+    afternoon: 0,
+    day: 0,
+  })
+  const [tempInRangeDay, setTempInRangeDay] = useState<number[]>([])
+  const [codeInRangeDay, setCodeInRangeDay] = useState<number[]>([])
+  
   const [tomorrow, setTomorrow] = useState<boolean>(false)
-  const [currentDate, loading, data, latitude, longitude] = useGetWeather(tomorrow);
+  const [currentDate, loading, data, latitude, longitude, error] = useGetWeather(tomorrow);
 
 
   const parseTemp = (data : any) => {
@@ -82,13 +93,15 @@ function App() {
       let weatherCodeDay = parseWeather(data)
       setTempDay(tempDay);
       setWeatherCodeDay(weatherCodeDay)
+      setTempInRangeDay(data?.hourly?.apparent_temperature?.slice(morningRange.start, afternoonRange.end))
+      setCodeInRangeDay(data?.hourly?.weathercode?.slice(morningRange.start, afternoonRange.end))
     }
   }, [data])
 
   return (
     <div className="App">
       <header>
-        {new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(currentDate)}
+        <div className="date">{new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(currentDate)}</div>
         <ToggleButton selected={tomorrow ? 2 : 1} onClick={() => setTomorrow(!tomorrow)} />
       </header>
 
@@ -105,8 +118,9 @@ function App() {
       </div>
 
       <div className="footer">
-        <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={data?.hourly?.apparent_temperature} />
-        <DayVisibility codesInDay={data?.hourly?.weathercode?.slice(morningRange.start, afternoonRange.end)} firstHour={morningRange.start} lastHour={afternoonRange.end} />
+        <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={tempInRangeDay} />
+        <DayVisibility codesInDay={codeInRangeDay} tempsInDay={tempInRangeDay} firstHour={morningRange.start} lastHour={afternoonRange.end} />
+        {error && ( <ErrorBloc message={error} /> )}
       </div>
 
     </div>
