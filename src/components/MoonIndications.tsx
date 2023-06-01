@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-var url = "http://api.farmsense.net/v1/moonphases/";
+var url = "https://api.farmsense.net/v1/moonphases/";
 function MoonIndications({ date, latitude, longitude }: { date: Date | undefined, latitude: number, longitude: number }) {
 
     const [moonPhase, setMoonPhase] = useState<string>('')
