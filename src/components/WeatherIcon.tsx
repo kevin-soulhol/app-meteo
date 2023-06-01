@@ -80,6 +80,7 @@ function WeatherIcon({code} : { code : number }) {
     }, [code])
 
     const _parseIcon : any = () => {
+        console.log(code)
         let cpCode = `${code}`
         if(code < 10){
             cpCode = `0${code}`
@@ -102,8 +103,11 @@ function WeatherIcon({code} : { code : number }) {
 
 
   return (
-    <div className="containIcon">
+    <div className="weatherIcon">
         <i className={icon}></i>
+        { (code >= 10) && (
+            <div className="backgroundColor"></div>
+        )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import ChartTemp from './components/ChartTemp';
 import WeatherIcon from './components/WeatherIcon';
 import ToggleButton from './components/ToogleButton';
 import MoonIndications from './components/MoonIndications';
+import DayVisibility from './components/DayVisibility';
 
 
 
@@ -40,7 +41,6 @@ function App() {
   const fetchWeather = () => {
 
     fetch(_parseUrl()).then(response => response.json()).then(data => {
-      console.log('meteoApi', data)
       let tempDay = parseTemp(data)
       let weatherCodeDay = parseWeather(data)
       setTempDay(tempDay);
@@ -144,6 +144,7 @@ function App() {
 
       <div className="footer">
         <ChartTemp label={data?.hourly?.time?.slice(morningRange.start, afternoonRange.end)} temperature={data?.hourly?.apparent_temperature} />
+        <DayVisibility codesInDay={data?.hourly?.weathercode?.slice(morningRange.start, afternoonRange.end)} firstHour={morningRange.start} lastHour={afternoonRange.end} />
       </div>
     
     </div>

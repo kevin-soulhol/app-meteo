@@ -1,0 +1,22 @@
+.weatherIcon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+        position: relative;
+        z-index: 2;
+    }
+
+    .backgroundColor {
+        background: radial-gradient(circle, rgba(139,148,152,1) 0%, rgba(215,219,219,0) 65%);
+        position: absolute;
+        z-index: 0;
+        width: 400%;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        opacity: 0.6;
+    }
+
+}

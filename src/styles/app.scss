@@ -50,7 +50,7 @@ header {
     }
 
     .mainIcon {
-        .containIcon {
+        .weatherIcon {
             position: absolute;
             font-size: 20em;
             left: -40%;
@@ -73,10 +73,12 @@ header {
 
 .footer {
     width: 100vw;
-    margin-bottom: 2em;
 }
 
 
 @import './components/weatherindications.scss';
 @import './components/toggleButton.scss';
 @import './components/moonIndications.scss';
+@import './components/chartTemp.scss';
+@import './components/dayVisibility.scss';
+@import './components/weatherIcon.scss';
