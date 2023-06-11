@@ -9,6 +9,7 @@
     z-index: 10;
     margin: auto;
     background: linear-gradient(207deg, rgba(19,103,138,1) 0%, rgba(69,196,176,1) 100%);
+    padding: 1em;
 
     .containSearchbar {
         background-color: rgba(255, 255, 255, 0.7);
@@ -60,6 +61,9 @@
     }
 
     @media screen and (max-width : 400px) {
+
+        align-items: flex-start;
+
         .containSearchbar {
             width: 90%;
         }
