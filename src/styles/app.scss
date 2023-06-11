@@ -37,6 +37,19 @@ header {
 
     .date {
         font-size: 0.8em;
+        cursor: pointer;
+
+        svg{
+            padding-left: 15px;
+        }
+
+        &:hover{
+            opacity: 0.7;
+        }
+
+        &:active {
+            opacity: 0.2;
+        }
     }
 }
 

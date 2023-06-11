@@ -39,14 +39,14 @@ function ChartTemp({ label, temperature }: { label: string[], temperature: numbe
     },
     scales: {
       y: {
-        display : false,
+        display: false,
         ticks: {
           stepSize: 1,
         }
       },
-      x : {
-        display : false,
-        grid : { display : false }
+      x: {
+        display: false,
+        grid: { display: false }
       }
     },
   };
@@ -60,16 +60,16 @@ function ChartTemp({ label, temperature }: { label: string[], temperature: numbe
         borderColor: 'white',
         backgroundColor: 'white',
         borderWidth: 3,
-        tension : 0.4,
+        tension: 0.4,
         fill: true,
-        radius : 0,
-        spanGaps : true,
+        radius: 0,
+        spanGaps: true,
       }
     ]
   }
 
   return (
-    <div className="ChartTemp" style={{ width: "100%", height : "150px" }}>
+    <div className="ChartTemp" style={{ width: "100%", height: "150px" }}>
       <Line options={options} data={data} />
     </div>
   );

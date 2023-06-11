@@ -35,7 +35,7 @@ const useGetWeather = ( tomorrow : boolean, location : ILocation ) => {
     
         
         fetch(url).then(response => response.json()).then(data => {
-            console.log(data)
+            console.log('ApiWeather', data)
             setData(data)
             setError(undefined)
             setLoading(false)

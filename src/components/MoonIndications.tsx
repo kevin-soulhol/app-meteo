@@ -16,7 +16,7 @@ function MoonIndications({ date, latitude, longitude }: { date: Date | undefined
             fetch(urlApi).then(response => response.json())
                 .then(data => {
                     console.log('MoonApi', data)
-                    if(data[0].error){
+                    if (data[0].error) {
                         setError(data[0].ErrorMsg)
                     } else {
                         setMoonPhase(data[0].Phase)
@@ -40,16 +40,16 @@ function MoonIndications({ date, latitude, longitude }: { date: Date | undefined
             }
         }
 
-        switch(moonPhase){
+        switch (moonPhase) {
             case "New Moon":
                 moon = 'new'
                 break;
-            case "Full Moon" :
+            case "Full Moon":
                 moon = 'full'
                 break;
         }
 
-        if(percent){
+        if (percent) {
             return `moon-${moon.toLocaleLowerCase().replace(' ', '-')}-${percent}`
         }
         return `moon-${moon.toLocaleLowerCase().replace(' ', '-')}`
@@ -69,6 +69,7 @@ function MoonIndications({ date, latitude, longitude }: { date: Date | undefined
 
         <div className="moonIndications">
             {error ? error : <i className={`wi wi-${getIcon()}`}></i>}
+            <span>{moonPhase}</span>
         </div>
     );
 }

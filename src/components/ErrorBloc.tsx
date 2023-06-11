@@ -1,4 +1,4 @@
-function ErrorBloc( { message } : { message : string}){
+function ErrorBloc({ message }: { message: string }) {
 
     return (
         <div className="error">

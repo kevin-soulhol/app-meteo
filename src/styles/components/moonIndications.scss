@@ -12,4 +12,10 @@
     box-shadow: 0 0 5px rgba(255,255, 255, 0.5);
     color: rgb(2, 5, 22);
     width: min-content;
+
+    span {
+        font-size: 12px;
+        width: max-content;
+        word-wrap: normal;
+    }
 }
