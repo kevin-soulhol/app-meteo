@@ -6,7 +6,7 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
@@ -61,7 +61,6 @@ function ChartTemp({ label, temperature }: { label: string[], temperature: numbe
         backgroundColor: 'white',
         borderWidth: 3,
         tension: 0.4,
-        fill: true,
         radius: 0,
         spanGaps: true,
       }

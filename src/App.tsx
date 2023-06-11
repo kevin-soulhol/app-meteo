@@ -23,78 +23,11 @@ const Latitude = 43.60
 const Longitude = 1.43333
 
 function App() {
-
-  const [tempDay, setTempDay] = useState<IWeatherDay>({
-    morning: '0',
-    afternoon: '0',
-    day: '0'
-  })
-  const [weatherCodeDay, setWeatherCodeDay] = useState<IWeatherCodeDay>({
-    morning: 0,
-    afternoon: 0,
-    day: 0,
-  })
-  const [tempInRangeDay, setTempInRangeDay] = useState<number[]>([])
-  const [codeInRangeDay, setCodeInRangeDay] = useState<number[]>([])
   const [location, setlocation] = useState<ILocation>({ latitude: Latitude, longitude: Longitude, label: 'Toulouse' })
-
   const [tomorrow, setTomorrow] = useState<boolean>(false)
   const [displaySearchBar, setDisplaySearchBar] = useState<boolean>(false)
-  const [currentDate, loading, data, error] = useGetWeather(tomorrow, location);
-
-
-  const parseTemp = (data: any) => {
-    let wichTemp = 'apparent_temperature'
-    let morningMoyenne = 0
-    let afternoonMoyenne = 0
-    let dayMoyenne = 0
-
-    if (data && data.hourly) {
-
-      morningMoyenne = getMoyenneTemp(data.hourly[wichTemp].slice(morningRange.start, morningRange.end))
-      afternoonMoyenne = getMoyenneTemp(data.hourly[wichTemp].slice(afternoonRange.start, afternoonRange.end))
-      dayMoyenne = getMoyenneTemp(data.hourly[wichTemp].slice(morningRange.start, afternoonRange.end))
-
-    }
-
-    return {
-      morning: new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3 }).format(morningMoyenne),
-      afternoon: new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3 }).format(afternoonMoyenne),
-      day: new Intl.NumberFormat('fr-FR', { maximumSignificantDigits: 3 }).format(dayMoyenne),
-    }
-
-  }
-
-  const getMoyenneWeatherCode = (arr: number[]) => {
-    arr = arr.filter(code => code != 0)
-    return arr.sort((a, b) =>
-      arr.filter(v => v === a).length
-      - arr.filter(v => v === b).length
-    ).pop() ?? 0;
-  }
-
-  const parseWeather = (data: any) => {
-    return {
-      morning: getMoyenneWeatherCode(data.hourly.weathercode.slice(morningRange.start, morningRange.end)),
-      afternoon: getMoyenneWeatherCode(data.hourly.weathercode.slice(afternoonRange.start, afternoonRange.end)),
-      day: getMoyenneWeatherCode(data.hourly.weathercode.slice(morningRange.start, afternoonRange.end))
-    }
-  }
-
-  const getMoyenneTemp = (arr: number[]) => {
-    return arr.reduce((acc: number, curr: number) => acc + curr, 0) / arr.length;
-  }
-
-  useEffect(() => {
-    if (data) {
-      let tempDay = parseTemp(data)
-      let weatherCodeDay = parseWeather(data)
-      setTempDay(tempDay);
-      setWeatherCodeDay(weatherCodeDay)
-      setTempInRangeDay(data?.hourly?.apparent_temperature?.slice(morningRange.start, afternoonRange.end))
-      setCodeInRangeDay(data?.hourly?.weathercode?.slice(morningRange.start, afternoonRange.end))
-    }
-  }, [data])
+  const [currentDate, loading, data, tempDay, weatherCodeDay, tempInRangeDay, codeInRangeDay, error] = useGetWeather(tomorrow, location);
+  
 
   const changeAddress = (item: IDataLocationApiAddress) => {
     if (item) {
