@@ -8,23 +8,17 @@ import DayVisibility from './components/DayVisibility';
 import useGetWeather from './utils/useGetWeather';
 import ErrorBloc from './components/ErrorBloc';
 
-
-
-interface IWeatherDay {
-  morning: string;
-  afternoon: string;
-  day: string;
-}
-
-interface IWeatherCodeDay {
-  morning: number;
-  afternoon: number;
-  day: number;
-}
+import IWeatherDay from './types/WeatherDay';
+import IWeatherCodeDay from './types/WeatherCodeDay';
+import ILocation from './types/Location';
+import SearchbarLocation from './components/SearchbarLocation';
+import IDataLocationApiAddress from './types/DataLocationApiAddress';
 
 const morningRange = { start : 8, end : 12 }
 const afternoonRange = { start : 13, end : 20 }
 
+const Latitude = 43.60
+const Longitude = 1.43333
 
 function App() {  
   
@@ -40,9 +34,11 @@ function App() {
   })
   const [tempInRangeDay, setTempInRangeDay] = useState<number[]>([])
   const [codeInRangeDay, setCodeInRangeDay] = useState<number[]>([])
+  const [location, setlocation] = useState<ILocation>({ latitude : Latitude, longitude : Longitude, label : 'Toulouse' })
   
   const [tomorrow, setTomorrow] = useState<boolean>(false)
-  const [currentDate, loading, data, latitude, longitude, error] = useGetWeather(tomorrow);
+  const [displaySearchBar, setDisplaySearchBar] = useState<boolean>(false)
+  const [currentDate, loading, data, error] = useGetWeather(tomorrow, location);
 
 
   const parseTemp = (data : any) => {
@@ -98,10 +94,22 @@ function App() {
     }
   }, [data])
 
+  const changeAddress = (item : IDataLocationApiAddress) => {
+    console.log(item)
+    setlocation({
+      latitude :  item.geometry.coordinates[0],
+      longitude :  item.geometry.coordinates[1], 
+      label : item.properties.city
+    })
+    setDisplaySearchBar(false)
+  }
+
   return (
     <div className="App">
       <header>
-        <div className="date">{new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(currentDate)}</div>
+        <div className="date" onClick={() => setDisplaySearchBar(true)}>
+          {new Intl.DateTimeFormat('fr-FR', { weekday: "long", month: "long", day: "numeric" }).format(currentDate)} - { location.label }
+        </div>
         <ToggleButton selected={tomorrow ? 2 : 1} onClick={() => setTomorrow(!tomorrow)} />
       </header>
 
@@ -114,7 +122,7 @@ function App() {
       </div>
 
       <div className="moonBloc">
-          <MoonIndications date={currentDate} latitude={latitude} longitude={longitude} />
+          <MoonIndications date={currentDate} latitude={location.latitude} longitude={location.longitude} />
       </div>
 
       <div className="footer">
@@ -123,6 +131,9 @@ function App() {
         {error && ( <ErrorBloc message={error} /> )}
       </div>
 
+      {displaySearchBar && (
+        <SearchbarLocation onSelect={(item : IDataLocationApiAddress ) => changeAddress(item) } />
+      )}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 
-const useGetWeather = (  tomorrow :  boolean ) => {
+import ILocation from "../types/Location"
+
+const useGetWeather = ( tomorrow : boolean, location : ILocation ) => {
     const [currentDate, setCurrentDate] = useState<Date>()
     const [data, setData] = useState<any>()
     const [loading, setLoading] = useState<boolean>(true)
@@ -10,8 +12,6 @@ const useGetWeather = (  tomorrow :  boolean ) => {
     const weatherModel = 'meteofrance'
     const hourly = ['temperature_2m', 'weathercode', 'apparent_temperature'];
     const daily = ['temperature_2m_max', 'apparent_temperature_max'];
-    const latitude = 43.60
-    const longitude = 1.43333
 
     const get = (date : Date) =>{
         if(!date){
@@ -19,7 +19,7 @@ const useGetWeather = (  tomorrow :  boolean ) => {
         }
 
         let url = `${baseUrl}${weatherModel}?`
-        url += `&longitude=${longitude}&latitude=${latitude}`
+        url += `&longitude=${location.longitude}&latitude=${location.latitude}`
         url += `&timezone=GMT`
     
         if(hourly){
@@ -70,10 +70,10 @@ const useGetWeather = (  tomorrow :  boolean ) => {
         if(currentDate){
             get(currentDate)
         }
-    }, [currentDate])
+    }, [currentDate, location])
 
 
-    return [currentDate, loading, data, latitude, longitude, error]
+    return [currentDate, loading, data, error]
 }
 
 export default useGetWeather;

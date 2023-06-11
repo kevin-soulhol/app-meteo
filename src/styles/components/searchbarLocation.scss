@@ -1,0 +1,57 @@
+.SearchbarLocation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    margin: auto;
+    background: linear-gradient(207deg, rgba(19,103,138,1) 0%, rgba(69,196,176,1) 100%);
+
+    .containSearchbar {
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        padding-right: 15px;
+        position: relative;
+
+        input {
+            background-color: transparent;
+            padding: 15px;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+        }
+
+        svg {
+            color: rgba(19,103,138,1);
+        }
+
+        .containAutocomplete {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 51px;
+            background-color: white;
+            color: rgb(26, 28, 39);
+            border-radius: 8px;
+            overflow: hidden;
+
+            .itemAutocomplete {
+                padding: 5px;
+                border-bottom: 1px solid rgb(177, 173, 173);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgb(230, 241, 236);
+                }
+            }
+        }
+    }
+
+
+}

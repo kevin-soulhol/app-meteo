@@ -1,6 +1,3 @@
-
-
-
 function ToggleButton({ selected, onClick } : { selected : number, onClick : Function }) {  
 
     const _onClick = () => {
