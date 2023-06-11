@@ -27,16 +27,20 @@ body {
     align-items: center;
     padding: 1em;
     padding-bottom: 1em;
+    padding-top: 0px;
     margin: auto;
 }
 
 header {
     width: 100%;
+    position: relative;
+    z-index: 1;
     text-align: center;
     text-transform: capitalize;
 
     .date {
         font-size: 0.8em;
+        padding: 5px;
         cursor: pointer;
 
         svg{
@@ -77,6 +81,7 @@ header {
             font-size: 20em;
             left: -40%;
             top: -20%;
+            z-index: 0;
             opacity: 0.3;
         }
     }
