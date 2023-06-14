@@ -32,8 +32,8 @@ function App() {
   const changeAddress = (item: IDataLocationApiAddress) => {
     if (item) {
       setlocation({
-        latitude: item.geometry.coordinates[0],
-        longitude: item.geometry.coordinates[1],
+        latitude: item.geometry.coordinates[1],
+        longitude: item.geometry.coordinates[0],
         label: item.properties.city
       })
     }
