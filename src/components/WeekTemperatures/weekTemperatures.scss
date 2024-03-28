@@ -1,0 +1,21 @@
+.week-temperatures {
+    display: flex;
+    width: auto;
+    gap: 0.5em;
+
+    .draggable {
+        display: flex;
+        width: auto;
+        gap: 0.5em;
+    }
+
+    @keyframes enter {
+        from {
+            transform: translateX(-150%);
+        }
+      
+        to {
+            transform: translateX(0%);
+        }
+    }
+}

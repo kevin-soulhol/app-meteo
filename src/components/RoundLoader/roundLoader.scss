@@ -1,0 +1,47 @@
+@import '../../variables.scss';
+
+.round-loader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+
+    .round {
+        background-color: $mainColor;
+        height: 50vh;
+        width: 50vh;
+        aspect-ratio: 1;
+        border-radius: 100%;
+        position: absolute;
+        left: -60%;
+        bottom: -30%;
+        transform-origin: center center;
+        transition: all 0.5s ease-in-out;
+    }
+
+
+    @keyframes move {
+        from {
+            transform: scale(0);
+        }
+      
+        to {
+            transform:  scale(5);
+        }
+    }
+
+    @keyframes move-reverse {
+        from {
+            transform:  scale(5);
+        }
+      
+        to {
+            transform: scale(0);
+        }
+    }
+}

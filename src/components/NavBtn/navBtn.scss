@@ -1,0 +1,98 @@
+@import "../../variables.scss";
+
+.nav-button {
+    $activateColor: #FDC98E;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin: 6px;
+    cursor: pointer;
+    user-select: none;
+
+    .container-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        svg  {
+            transition: $transition;
+            
+            path {
+                fill: white;
+                fill-opacity: 0.5;
+                transition: $transition;
+            }
+        }
+
+        .date {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 300;
+            padding-top: 6px;
+            width: 100%;
+            text-align: center;
+            opacity: 0.5;
+            color: white;
+        }
+    }
+
+    .container-text {
+        width: 100%;
+        text-align: center;
+        font-size: 10px;
+        font-weight: 200;
+        transition: $transition;
+        color: white;
+    }
+
+    &[data-active="true"] {
+        .container-icon {
+            svg {
+                filter: drop-shadow(0px 0px 4px $activateColor);
+
+                path {
+                    fill: $activateColor;
+                    fill-opacity: 1;
+                }
+            }
+
+            .date {
+                color: $activateColor;
+                opacity: 1;
+                text-shadow: 0px 0px 4px $activateColor;
+            }
+        }
+
+        .container-text {
+            font-weight: 300;
+            color: $activateColor;
+            text-decoration: solid underline $activateColor;
+        }
+    }
+
+    &:hover {
+        .container-icon {
+            svg {
+                path {
+                    fill-opacity: 1;
+                }
+            }
+
+            .date {
+                opacity: 1;
+                text-shadow: 0px 0px 4px white;
+            }
+        }
+
+        .container-text {
+            opacity: 1;
+        }
+    }
+}

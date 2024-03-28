@@ -1,4 +1,4 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useGetLocation from "../utils/useGetLocation";
 import { useEffect, useState } from "react";
@@ -54,6 +54,15 @@ function SearchbarLocation({ onSelect }: { onSelect: Function }) {
         }
     }
 
+    const cancelInput = () => {
+        setValue('')
+        setLookingFor('')
+        setDisplayAutocomplete(false)
+        if (onSelect) {
+            onSelect(null)
+        }
+    }
+
     useEffect(() => {
         if (hoveredItem < 0) {
             setHoveredItem(0)
@@ -71,7 +80,7 @@ function SearchbarLocation({ onSelect }: { onSelect: Function }) {
                     onChange={(evt) => _onChange(evt)}
                     placeholder="City"
                 />
-                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon={faClose} onClick={cancelInput} />
 
                 {displayAutocomplete && (
                     <div className="containAutocomplete">
