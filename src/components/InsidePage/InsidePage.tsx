@@ -12,6 +12,13 @@ import DayTemperatures from "../DayTemperatures/DayTemperatures"
 import MenuNavBar from "../MenuNavBar/MenuNavBar"
 import SearchBarPosition from "../SearchBarPosition/SearchBarPosition"
 
+
+
+const variantsContainerSearchbar = {
+    open: { scale: 1 },
+    closed: { scale: 0 },
+  }
+
 function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boolean}) {
     const _weatherService = useSelector(weatherService)
     
@@ -21,10 +28,20 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
         {data && (
             <>
                 <WeatherBackground weather={data.weatherStringDay} />
+
+                <motion.div
+                 className="container-searchbar"
+                    animate={_weatherService.searchbarVisible ? "open" : "closed"}
+                    variants={variantsContainerSearchbar}
+                >
+                    <div className="bg">
+                        <SearchBarPosition onSelect={ (selected : any) => { console.log(selected)}}/>
+                    </div>
+
+                </motion.div>
+
                 <div className="page page-home">
                     <div className="layout">
-
-                        <SearchBarPosition onSelect={ (selected : any) => { console.log(selected)}}/>
 
                         <DisplayTemp temperature={data.temperatureDay} city={'CACA'} tomorrow={tomorrow} />
 

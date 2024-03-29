@@ -11,6 +11,7 @@ export interface IWeatherService {
     weather: AllowedWeather;
     weekVisible: boolean;
     detailsVisible: boolean;
+    searchbarVisible: boolean;
     dataToday?: ISanitizedData;
     dataTomorrow?: ISanitizedData;
     dataWeek?: IWeekWeather[];
@@ -29,7 +30,8 @@ const initialState : IWeatherService = {
     tomorrow: sessionStorage.getItem('tomorrow') === 'false' ? false : true,
     weather: 'sun',
     weekVisible: sessionStorage.getItem('weekVisible') === 'true' || false,
-    detailsVisible: sessionStorage.getItem('detailsVisible') === 'true' || false
+    detailsVisible: sessionStorage.getItem('detailsVisible') === 'true' || false,
+    searchbarVisible: true
 }
 
 
@@ -49,6 +51,9 @@ const WeatherSlice = createSlice({
             state.detailsVisible = !state.detailsVisible
             sessionStorage.setItem('detailsVisible', JSON.stringify(state.detailsVisible))
         },
+        toggleSearchbarVisible: (state ) => {
+            state.searchbarVisible = !state.searchbarVisible
+        },
         setDataToday: (state, action ) => {
             state.dataToday = action.payload
         },
@@ -61,7 +66,7 @@ const WeatherSlice = createSlice({
     },
 })
 
-export const { toggleTomorrow, toggleWeekVisible, toggleDetailsVisible,  setDataToday, setDataTomorrow, setDataWeek } = WeatherSlice.actions
+export const { toggleTomorrow, toggleWeekVisible, toggleDetailsVisible,  setDataToday, setDataTomorrow, setDataWeek, toggleSearchbarVisible } = WeatherSlice.actions
 
 export const weatherService = (state : any) => state.weather as IWeatherService
 

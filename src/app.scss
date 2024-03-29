@@ -23,6 +23,44 @@ body {
     box-sizing: border-box;
     position: relative;
     padding: 1em;
+    
+
+    .container-searchbar {
+        $size : 150vh;
+        width: $size;
+        height: $size;
+        position: fixed;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        border-radius: 100%;
+        box-sizing: border-box;
+        border: 1px solid red;
+        overflow: hidden;
+
+        .bg {
+            background-color: $mainColor;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .searchbar-position {
+            }
+        }
+
+
+    }
 
     .layout,
     .page {
