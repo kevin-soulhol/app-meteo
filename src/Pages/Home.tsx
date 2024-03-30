@@ -6,16 +6,17 @@ import useGetWeather, { ISanitizedData } from "../utils/useGetWeather";
 import InsidePage from "../components/InsidePage/InsidePage";
 
 
+const variant = {
+    initial : { x: 1000 },
+    animate : { x: 0 },
+    exit : { x: 1000 }
 
-const Latitude = 43.60
-const Longitude = 1.43333
-
-
+}
 
 function Home() {
     const dispatch = useDispatch()
     const _weatherService = useSelector(weatherService)
-    const [location, setlocation] = useState<ILocation>({ latitude: Latitude, longitude: Longitude, label: 'Toulouse' })
+    const [location, setlocation] = useState<ILocation>(_weatherService.location as ILocation)
     const [tomorrow, setTomorrow] = useState<boolean>(true)
 
     const [loading, dataToday, dataTomorrow, dataWeek] = useGetWeather(location)
@@ -38,6 +39,10 @@ function Home() {
     }, [_weatherService.tomorrow])
 
 
+    useEffect(() => {
+        setlocation(_weatherService.location || {latitude: 43.6047, longitude: 1.43333, city : 'Toulouse'})
+    }, [_weatherService.location])
+
 
     return (
         <>
@@ -48,9 +53,7 @@ function Home() {
                     
                     <motion.div 
                     className="layout-animation tomorrow"
-                    initial={{ x: 1000 }} 
-                    animate={{ x: 0 }} 
-                    exit={{ x: -1000 }} 
+                    variants={variant}
                     >
                         <InsidePage data={dataTomorrow as ISanitizedData} tomorrow={true} />
                     </motion.div>
@@ -59,9 +62,7 @@ function Home() {
                     
                     <motion.div 
                     className="layout-animation today"
-                    initial={{ x: -1000 }} 
-                    animate={{ x: 0 }} 
-                    exit={{ x: 1000 }} 
+                    variants={variant}
                     >
                         <InsidePage data={dataToday as ISanitizedData} tomorrow={false} />
                     </motion.div>

@@ -2,18 +2,20 @@
 
 
     $bgColor : hsla(0, 0%, 100%, 0.7);
+    $width : 300px;
 
     position: relative;
-    width: fit-content;
+    width: $width;
 
     .container-input {
-        width: fit-content;
+        width: $width;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: $bgColor;
         border-radius: 16px;
         padding: 0 1em;
+        box-sizing: border-box;
         
         input {
             outline: none;
@@ -32,7 +34,7 @@
 
     .autocomplete-container {
         margin-top: 5px;
-        width: 100%;
+        width: $width;
         background-color: $bgColor;
         border-radius: 16px;
         padding: 0.5em 0;

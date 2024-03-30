@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
-
 import ILocation from "../types/Location"
-import { parse } from "@fortawesome/fontawesome-svg-core"
 
 export type AllowedWeather = 'sun' | 'cloudy' | 'fog' | 'haze' | 'rain' | 'snow' | 'wind' | 'showers' | 'stormShowers' | 'thunderstorm' | 'sleet'| 'rainMix' | 'hail'
 

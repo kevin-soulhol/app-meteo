@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { ISanitizedData } from "../../utils/useGetWeather"
-import { weatherService } from "../../redux/WeatherReducer"
+import { setLocation, toggleSearchbarVisible, weatherService } from "../../redux/WeatherReducer"
 import WeatherBackground from "../WeatherBackground/WeatherBackground"
 import DisplayTemp from "../DisplayTemp/DisplayTemp"
 import IconWeather from "../IconWeather/IconWeather"
@@ -15,12 +15,19 @@ import SearchBarPosition from "../SearchBarPosition/SearchBarPosition"
 
 
 const variantsContainerSearchbar = {
-    open: { scale: 1 },
-    closed: { scale: 0 },
+    open: { scale: 1, borderRadius: "0px"},
+    closed: { scale: 0, borderRadius: "100%", innerHeight: "100vw", x : -200, y : 1000},
   }
 
 function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boolean}) {
     const _weatherService = useSelector(weatherService)
+    const dispatch = useDispatch()
+
+    const _onSelect = (selected : any) => {
+        const coord = selected.geometry.coordinates
+        dispatch(setLocation({latitude: coord[1], longitude: coord[0], city : selected.properties.label}))
+        dispatch(toggleSearchbarVisible())
+    }
     
 
     return (
@@ -34,16 +41,14 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
                     animate={_weatherService.searchbarVisible ? "open" : "closed"}
                     variants={variantsContainerSearchbar}
                 >
-                    <div className="bg">
-                        <SearchBarPosition onSelect={ (selected : any) => { console.log(selected)}}/>
-                    </div>
+                        <SearchBarPosition onSelect={_onSelect}/>
 
                 </motion.div>
 
                 <div className="page page-home">
                     <div className="layout">
 
-                        <DisplayTemp temperature={data.temperatureDay} city={'CACA'} tomorrow={tomorrow} />
+                        <DisplayTemp temperature={data.temperatureDay} city={_weatherService.location?.city || ''} tomorrow={tomorrow} />
 
                         <div className="right-informations">
                             <IconWeather icon={data.weatherStringDay} />

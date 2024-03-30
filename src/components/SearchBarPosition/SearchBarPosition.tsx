@@ -10,12 +10,12 @@ function SearchBarPosition({ onSelect }: { onSelect: Function }) {
     const [data] = useGetLocation(value)
 
     useEffect(() => {
-        if(value.length > 0){
+        if(value.length > 0 && data?.length !== 0){
             setAutocompleteOpen(true)
         } else {
             setAutocompleteOpen(false)
         }
-    }, [value])
+    }, [value, data])
 
     const _onSelect = (item: any) => {
         setAutocompleteOpen(false)
@@ -38,7 +38,7 @@ function SearchBarPosition({ onSelect }: { onSelect: Function }) {
                     placeholder="Search position"
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
-                />
+                /> 
                 {value.length === 0 ? (
                     <FontAwesomeIcon icon={faSearch}  onClick={cancelInput} />
                 ) : (

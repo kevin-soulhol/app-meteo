@@ -20,7 +20,7 @@ export interface IWeatherService {
 export interface ILocation {
     latitude : number;
     longitude : number;
-    label?: string;
+    city?: string;
 }
 
 const initialState : IWeatherService = {
@@ -31,7 +31,8 @@ const initialState : IWeatherService = {
     weather: 'sun',
     weekVisible: sessionStorage.getItem('weekVisible') === 'true' || false,
     detailsVisible: sessionStorage.getItem('detailsVisible') === 'true' || false,
-    searchbarVisible: true
+    searchbarVisible: false,
+    location: {latitude: 43.6047, longitude: 1.43333, city : 'Toulouse'}
 }
 
 
@@ -63,10 +64,13 @@ const WeatherSlice = createSlice({
         setDataWeek: (state, action ) => {
             state.dataWeek = action.payload
         },
+        setLocation: (state, action ) => {
+            state.location = action.payload
+        },
     },
 })
 
-export const { toggleTomorrow, toggleWeekVisible, toggleDetailsVisible,  setDataToday, setDataTomorrow, setDataWeek, toggleSearchbarVisible } = WeatherSlice.actions
+export const { toggleTomorrow, toggleWeekVisible, toggleDetailsVisible,  setDataToday, setDataTomorrow, setDataWeek, toggleSearchbarVisible, setLocation } = WeatherSlice.actions
 
 export const weatherService = (state : any) => state.weather as IWeatherService
 
