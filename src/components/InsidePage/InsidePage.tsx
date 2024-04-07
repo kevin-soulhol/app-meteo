@@ -65,7 +65,7 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
                                 exit={{ x: -300 }} 
                                 >
                                     <DayDetails humidityPercent={data.humidityDay} wind={data.windDay} precipitation={data.precipitationDay
-                                    } sunset={new Date(data.sunset)} sunrise={new Date(data.sunrise)} />
+                                    } sunset={data.sunset} sunrise={data.sunrise} />
                                 </motion.div>
                             )}
                         </AnimatePresence>

@@ -3,7 +3,7 @@ import './dayDetails.scss'
 
 const details = ['humidity', 'wind', 'precipitation', 'sunrise']
 
-function DayDetails ( { humidityPercent, wind, precipitation, sunset, sunrise } : { humidityPercent : number, wind : number, precipitation : number, sunset : Date, sunrise : Date}) {
+function DayDetails ( { humidityPercent, wind, precipitation, sunset, sunrise } : { humidityPercent : number, wind : number, precipitation : number, sunset : string, sunrise : string}) {
 
     
     return (
@@ -32,7 +32,7 @@ function DayDetails ( { humidityPercent, wind, precipitation, sunset, sunrise } 
                 }
 
                 if(detail === 'sunrise') {
-                    text = new Intl.DateTimeFormat('fr-FR', { hour: "numeric", minute: "numeric" }).format(sunrise)
+                    text = new Date(sunrise[0] + ':00.000Z').toLocaleString('fr-FR', { hour: "numeric", minute: "numeric" })
                 }
 
                 let columns = [
@@ -45,7 +45,7 @@ function DayDetails ( { humidityPercent, wind, precipitation, sunset, sunrise } 
                 if(detail === 'sunrise') {
                     columns.push({
                         title: 'Couché',
-                        text: new Intl.DateTimeFormat('fr-FR', { hour: "numeric", minute: "numeric" }).format(sunset)
+                        text: new Date(sunset[0] + ':00.000Z').toLocaleString('fr-FR', { hour: "numeric", minute: "numeric" })
                     })
                 
                 }

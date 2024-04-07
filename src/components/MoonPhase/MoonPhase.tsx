@@ -61,7 +61,7 @@ function MoonPhase({ latitude, longitude, tomorrow } : { latitude : number, long
         const keysWithoutNumber = ['new_moon', 'first_quarter', 'full_moon', 'last_quarter']
         let number = ''
         if(!keysWithoutNumber.includes(res)) {
-            number = `_${Math.round(illumination/100*6)}`
+            number = `_${Math.round(illumination/100*6)+1}`
         }
 
         res = `/moon-icons/${res}${number}-moon.svg`

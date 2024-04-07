@@ -103,7 +103,7 @@ const correspondance: ICorrespondance = {
 }
 
 const morningRange = { start: 8, end: 12 }
-const afternoonRange = { start: 13, end: 20 }
+const afternoonRange = { start: 13, end: 22 }
 
 const baseUrl = 'https://api.open-meteo.com/v1/'
 const weatherModel = 'meteofrance'
@@ -130,7 +130,7 @@ const useGetWeather = (location: ILocation) => {
 
         const dataToday = await get(today)
         const dataTomorrow = await get(tomorrow)
-        const dataWeek = await getWeek()
+        const dataWeek =  await getWeek()
 
         const sanitizedDataToday = _sanitizeData( dataToday, dataWeek )
         const sanitizedDataTomorrow = _sanitizeData( dataTomorrow, dataWeek.slice(1) )
@@ -138,7 +138,6 @@ const useGetWeather = (location: ILocation) => {
 
         setDataToday(sanitizedDataToday, )
         setDataTomorrow(sanitizedDataTomorrow)
-        console.log(sanitizedDataToday)
         setLoading(false)
     }
 
@@ -169,6 +168,7 @@ const useGetWeather = (location: ILocation) => {
         url += `&end_date=${_getStringDate(date)}`
 
 
+        
         return fetch(url).then(response => response.json()).then(data => {
             return data
         })
