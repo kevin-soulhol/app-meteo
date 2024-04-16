@@ -60,9 +60,9 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
                             {_weatherService.detailsVisible && (
                                 <motion.div 
                                 className="day-details-container"
-                                initial={{ x: -300 }} 
-                                animate={{ x: 0 }} 
-                                exit={{ x: -300 }} 
+                                initial={{ x: '-150%' }} 
+                                animate={{ x: '0%' }} 
+                                exit={{ x: '-150%' }} 
                                 >
                                     <DayDetails humidityPercent={data.humidityDay} wind={data.windDay} precipitation={data.precipitationDay
                                     } sunset={data.sunset} sunrise={data.sunrise} />
@@ -75,9 +75,9 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
                             {_weatherService.weekVisible && (
                                 <motion.div 
                                 className="week-temperatures-container"
-                                initial={{ x: -1000 }} 
-                                animate={{ x: 0 }} 
-                                exit={{ x: 1000 }} 
+                                initial={{ x: '-150%' }} 
+                                animate={{ x: '0%' }} 
+                                exit={{ x: '150%' }} 
                                 transition={{
                                     x: { type: "spring", stiffness: 300, damping: 30 },
                                 }}>
@@ -91,9 +91,9 @@ function InsidePage({ data, tomorrow } : { data : ISanitizedData, tomorrow : boo
                             {!_weatherService.weekVisible && (
                                     <motion.div 
                                     className="day-temperatures-container"
-                                    initial={{ x: -1000 }} 
-                                    animate={{ x: 0 }} 
-                                    exit={{ x: 1000 }} 
+                                    initial={{ x: '-150%' }} 
+                                    animate={{ x: '0%' }} 
+                                    exit={{ x: '200%' }} 
                                     transition={{
                                         x: { type: "spring", stiffness: 300, damping: 30 },
                                     }}>
