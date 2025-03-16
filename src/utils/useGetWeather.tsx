@@ -135,8 +135,8 @@ const useGetWeather = (location: ILocation) => {
         const sanitizedDataToday = _sanitizeData( dataToday, dataWeek )
         const sanitizedDataTomorrow = _sanitizeData( dataTomorrow, dataWeek.slice(1) )
 
-
-        setDataToday(sanitizedDataToday, )
+        
+        setDataToday(sanitizedDataToday)
         setDataTomorrow(sanitizedDataTomorrow)
         setLoading(false)
     }
@@ -227,7 +227,12 @@ const useGetWeather = (location: ILocation) => {
     }
 
     const _getTemperatureDay = (data: any) => {
-        const moyenne = _getMoyenne(data.hourly?.temperature_100m || data.hourly.apparent_temperature, 1)
+        let daily_temps = data.hourly?.temperature_100m || data.hourly.apparent_temperature
+        daily_temps = daily_temps.filter(Boolean)
+        if(daily_temps.length === 0){
+            daily_temps = new Array(24).fill(data.daily.temperature_2m_max[0])
+        }
+        const moyenne = _getMoyenne(daily_temps, 1)
         return Math.round(moyenne * 10) / 10 as number
     }
 
