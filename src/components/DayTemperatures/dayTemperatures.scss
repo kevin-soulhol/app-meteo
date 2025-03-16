@@ -1,0 +1,77 @@
+.day-temperatures {
+
+    $containerIconHeight: 45px;
+    $height: 100px;
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: calc($containerIconHeight + 5px);
+    color: white;
+    font-weight: 200;
+    font-size: 12px;
+
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+
+    .container-max-min {
+        top: -5px;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: 0;
+
+        .temp {
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    .container-icons {
+        top: 0;
+        height: $containerIconHeight;
+        padding-top: 0px;
+
+        .container-icon {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            .icon-weather {
+                max-width: 55px;
+            }
+        }
+    }
+
+    .container-grid {
+        max-height: $height;
+
+        .container-lines {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .line-grid {
+            width: 0px;
+            height: 100%;
+            border-right: 1px dotted white;
+            opacity: 0.5;
+        }
+    }
+
+}

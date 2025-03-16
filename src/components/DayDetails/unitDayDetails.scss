@@ -1,0 +1,27 @@
+.unit-day-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, 0.5);
+    border-radius: 16px;
+    padding: 10px 12px;
+    min-width: 140px;
+    width: fit-content;
+    gap: 1em;
+
+    .column {
+        display: flex;
+        flex-direction: column;
+        line-height: 18px;
+
+        .title {
+            font-size: 10px;
+            font-weight: 200;
+        }
+
+        .text {
+            font-size: 20px;
+            font-weight: 300;
+        }
+    }
+}
